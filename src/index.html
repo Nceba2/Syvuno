@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Syvuno | Intelligent SaaS Platform</title>
+  <base href="/">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body class="slideshow-container">
+<!-- GRADIENT NAVIGATION BAR: Light & Deep Blue with Lime Green accents -->
+<nav class="nav-bar">
+    <div class="nav-container">
+        <div class="logo-area">
+            <h1>Syvuno</h1>
+            <div class="tagline">Innovation made easy.</div>
+        </div>
+        <div class="nav-links">
+            <!-- <a href="#">Platform</a> -->
+            <a href="#">Solutions</a>
+            <a href="#">Pricing</a>
+            <a href="#">Contact us</a>
+            <a href="#" class="demo-btn">Request demo →</a>
+            <a href="#">Login</a>
+            <a href="#">Sign up</a>
+        </div>
+    </div>
+</nav>
+
+
+  <app-root></app-root>  
+
+  <footer>
+      <p>© 2025 Syvuno — Innovation made easy.</p>
+  </footer>
+</body>
+
+
+<script>
+    // ========== ROTATING BANNER LOGIC (light/dark sync) ==========
+    const slides = document.querySelectorAll('.banner-slide');
+    const dotsContainer = document.getElementById('bannerDots');
+    let currentIndex = 0;
+    let intervalId = null;
+    const AUTO_SWITCH_MS = 5000;
+
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, idx) => {
+            const dot = document.createElement('button');
+            dot.classList.add('dot');
+            if (idx === currentIndex) dot.classList.add('active-dot');
+            dot.setAttribute('data-index', idx);
+            dot.addEventListener('click', () => {
+                stopAutoRotation();
+                goToSlide(idx);
+                startAutoRotation();
+            });
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= slides.length) index = 0;
+        slides.forEach((slide, i) => {
+            if (i === index) slide.classList.add('active');
+            else slide.classList.remove('active');
+        });
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, i) => {
+            if (i === index) dot.classList.add('active-dot');
+            else dot.classList.remove('active-dot');
+        });
+        currentIndex = index;
+    }
+
+    function nextSlide() {
+        let nextIdx = currentIndex + 1;
+        if (nextIdx >= slides.length) nextIdx = 0;
+        goToSlide(nextIdx);
+    }
+
+    function startAutoRotation() {
+        if (intervalId) clearInterval(intervalId);
+        intervalId = setInterval(nextSlide, AUTO_SWITCH_MS);
+    }
+
+    function stopAutoRotation() {
+        if (intervalId) {
+            clearInterval(intervalId);
+            intervalId = null;
+        }
+    }
+
+    function initBanner() {
+        if (slides.length) {
+            goToSlide(0);
+            createDots();
+            startAutoRotation();
+            const bannerContainer = document.querySelector('.banner-container');
+            if (bannerContainer) {
+                bannerContainer.addEventListener('mouseenter', stopAutoRotation);
+                bannerContainer.addEventListener('mouseleave', startAutoRotation);
+            }
+        }
+    }
+
+    // ========== PRICING BUTTONS (professional action) ==========
+    const allPlanBtns = document.querySelectorAll('.card-btn');
+    allPlanBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const parentCard = btn.closest('.pricing-card');
+            let planText = 'selected plan';
+            if (parentCard) {
+                const nameElem = parentCard.querySelector('.plan-name');
+                if (nameElem) planText = nameElem.innerText;
+            }
+            alert(`✨ Syvuno: You selected the ${planText} plan. A product specialist will contact you to discuss secure healthcare infrastructure.`);
+        });
+    });
+
+    const demoNavBtn = document.querySelector('.demo-btn');
+    if (demoNavBtn) {
+        demoNavBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('📋 Syvuno demo request received. Light blue security & lime green innovation await — we’ll reach out shortly.');
+        });
+    }
+
+    // smooth scroll for pricing link
+    const pricingLink = Array.from(document.querySelectorAll('.nav-links a')).find(link => link.innerText.includes('Pricing'));
+    if (pricingLink) {
+        pricingLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelector('.pricing-section').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    // extra style to boost lime green and light blue vibrancy
+    const extraStyle = document.createElement('style');
+    extraStyle.textContent = `
+        .banner-slide {
+            background-size: cover;
+            background-position: center 40%;
+        }
+        .pricing-card .card-btn:active {
+            transform: scale(0.97);
+        }
+        .nav-links a:not(.demo-btn) {
+            position: relative;
+        }
+        .nav-links a:not(.demo-btn):after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #C0E34A;
+            transition: width 0.2s;
+        }
+        .nav-links a:not(.demo-btn):hover:after {
+            width: 100%;
+        }
+        .pricing-card .features li::before {
+            background: #E9F7DF;
+            color: #B5D83B;
+        }
+        .tagline {
+            background: rgba(192, 227, 74, 0.35);
+        }
+        .banner-dots .dot.active-dot {
+            background: #C0E34A;
+            box-shadow: 0 0 8px #DCF68F;
+        }
+    `;
+    document.head.appendChild(extraStyle);
+
+    window.addEventListener('load', () => {
+        initBanner();
+        document.body.style.overflowX = 'hidden';
+        setTimeout(() => {
+            const activeSlideNow = document.querySelector('.banner-slide.active');
+            if (activeSlideNow) activeSlideNow.style.opacity = '1';
+        }, 60);
+    });
+</script>
+</html>

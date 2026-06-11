@@ -1,0 +1,334 @@
+.floating-menu {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%); /* Centers it vertically */
+  display: flex;
+  flex-direction: column;
+  z-index: 1050; /* Ensures it stays above other content */
+}
+
+.floating-btn {
+  width: 80px;
+  height: 80px;
+  background-color: #31a4d8; /* The blue from your image */
+  color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 5px !important;
+}
+
+.floating-btn:hover {
+  background-color: #268bb8; /* Slightly darker on hover */
+  padding-right: 10px; /* Subtle "pop-out" effect */
+}
+
+/* Remove border-radius to keep them square like the image */
+.floating-btn:first-child {
+  border-top-left-radius: 4px;
+}
+
+.floating-btn:last-child {
+  border-bottom-left-radius: 4px;
+}
+
+
+
+
+/** measurables */
+.dashboard-container {
+  padding: 20px;
+  /* background: #f4f6f9; */
+  min-height: 90vh;
+  font-family: Arial, sans-serif;
+}
+
+/* KPI Cards */
+/* .kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+} */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.kpi-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.kpi-card h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.kpi-card p {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #000 !important;
+}
+
+.kpi-card.alert {
+  border-left: 5px solid #ff4d4f;
+}
+
+/* Grid Layout */
+.main-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+/* Cards */
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  margin-bottom: 15px;
+}
+
+/* Appointments Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+} 
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+thead {
+  background: #f1f1f1;
+}
+
+tbody tr {
+  border-bottom: 1px solid #eee;
+}
+
+/* Status Colors */
+.waiting {
+  color: orange;
+  height: 4em;
+}
+
+.inprogress {
+  color: green;
+  height: 4em;
+}
+
+.missed {
+  color: red;
+  height: 4em;
+}
+
+.modal-backdrop.show {
+    backdrop-filter: blur(5px);
+    background-color: rgba(10, 40, 107, 0.5) !important; /* Matches your theme! */
+}
+
+/* Buttons */
+.btn {
+  padding: 6px 12px;
+  border: none;
+  background: #1890ff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #40a9ff;
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* scroll bar */
+.custom-scroll {
+  overflow-y: auto;
+  max-height: 100vh; /* or whatever fits your layout */
+}
+
+/* Chrome, Edge, Safari */
+.custom-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #1890ff;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #40a9ff;
+}
+
+/* Firefox */
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #1890ff #f1f1f1;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1890ff, #52c41a);
+}
+.app-footer {
+  width: 100%;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+  
+  padding: 8px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+
+  background: transparent;
+  z-index: 10;
+}
+
+/* Optional: subtle hover clarity */
+.app-footer:hover {
+  margin-top: 2em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 992px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1600px) {
+
+  .dashboard-container {
+    max-width: 1400px;
+    margin: auto;
+  }
+
+  .kpi-card p {
+    font-size: 32px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .dashboard-container {
+    padding: 10px;
+  }
+
+  .kpi-card p {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  table th, table td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  button {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+
+}
+
+
+
+
+.btn-action {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%; /* Makes it perfectly round */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+  background: transparent;
+  color: black;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Specific colors for hover states */
+.btn-view:hover {
+  background-color: rgba(13, 110, 253, 0.2); /* Slight Blue glow */
+  border-color: #0d6efd;
+  color: #0d6efd;
+  transform: scale(1.1);
+}
+
+.btn-add:hover {
+  background-color: rgba(25, 135, 84, 0.2); /* Slight Green glow */
+  border-color: #198754;
+  color: #198754;
+  transform: scale(1.1);
+}
+
+/* Remove default button focus outline */
+.btn-action:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.modal-tiles {
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%; */
+  
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  min-height: 300px;
+}
+
+.modal-tiles button,
+.modal-tiles .tile-item {
+  width: 100%;
+  padding: 1rem;
+  text-align: left;
+}

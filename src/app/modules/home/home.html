@@ -1,0 +1,78 @@
+
+<!-- banner.component.html - Modern Angular syntax -->
+<div class="banner-container">
+  <!-- New control flow syntax - no imports needed! -->
+  @for (slide of slides; track $index; let i = $index) {
+    <div class="banner-slide" 
+         [class.active]="i === currentIndex"
+         [style.backgroundImage]="'url(' + slide.image + ')'">
+      <div class="banner-content">
+        <h2>{{ slide.title }}</h2>
+        <p>{{ slide.subtitle }}</p>
+      </div>
+    </div>
+  }
+  
+  <div class="banner-dots">
+    @for (slide of slides; track $index; let i = $index) {
+      <button class="dot"
+              [class.active-dot]="i === currentIndex"
+              (click)="goToSlide(i)">
+      </button>
+    }
+  </div>
+</div>
+
+<!-- PRICING SECTION: 3 cards (Basic, Growth, Enterprise) with brand colors -->
+<section class="pricing-section">
+    <div class="section-header">
+        <h2>Transparent, Flexible Pricing</h2>
+        <p>Choose the perfect plan for your business scale</p>
+    </div>
+    <div class="cards-container">
+        <!-- Basic Package: light blue accents -->
+        <div class="pricing-card">
+            <div class="plan-name">Basic</div>
+            <div class="price">R499<span>/month</span></div>
+            <div class="description">Essential tools to get started with secure isolation.</div>
+            <ul class="features">
+                <li>Up to 5 team members</li>
+                <li>Basic sandbox environment</li>
+                <li>Standard support (48h response)</li>
+                <li>API rate limit: 1k/min</li>
+                <li>Community access</li>
+            </ul>
+            <button class="card-btn">Start with Basic →</button>
+        </div>
+        <!-- Growth Package (most popular) lime green + deep blue synergy -->
+        <div class="pricing-card" style="border-top: 1px solid #C0E34A;">
+            <div class="plan-name">Growth</div>
+            <div class="price">R850<span>/month</span></div>
+            <div class="description">Advanced compliance, team scaling & priority pipeline.</div>
+            <ul class="features">
+                <li>Unlimited team members</li>
+                <li>Advanced secure containers</li>
+                <li>Priority support (12h response)</li>
+                <li>API rate limit: 10k/min</li>
+                <li>Advanced analytics & audit logs</li>
+                <li>SSO & RBAC ready</li>
+            </ul>
+            <button class="card-btn">Select Growth →</button>
+        </div>
+        <!-- Enterprise Package: deep blue + lime green custom -->
+        <div class="pricing-card enterprise-card">
+            <div class="plan-name">Enterprise</div>
+            <div class="price">Custom<span></span></div>
+            <div class="description">Tailored security, dedicated environment and SLA.</div>
+            <ul class="features">
+                <li>Fully isolated tenancy</li>
+                <li>Custom compliance (SOC2, HIPAA, GDPR)</li>
+                <li>24/7 dedicated support + CSM</li>
+                <li>Unlimited API & custom integrations</li>
+                <li>On-premise or VPC deployment</li>
+                <li>Advanced threat detection</li>
+            </ul>
+            <button class="card-btn">Talk to experts →</button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,166 @@
+
+<!-- side icons -->
+<div class="floating-menu">
+  <button class="floating-btn" title="Cart" (click)="open(content,'accounts')">
+    <i class="fa-solid fa-user"></i>
+  </button>
+  <button class="floating-btn" title="Gallery" (click)="open(content,'files')">
+    <i class="fa-solid fa-folder"></i>
+  </button>
+  <button class="floating-btn" title="Browser" (click)="open(content,'settings')">
+    <i class="fa-solid fa-cog"></i>
+  </button>
+</div>
+
+<!-- measurables -->
+<div class="dashboard-container main custom-scroll">
+
+  <!-- KPI Cards -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <h3>Total Patients</h3>
+      <p>{{ stats[0].TotalPatients }}</p>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Appointments Today</h3>
+      <p>{{ stats[0].AppointmentsToday }}</p>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Checked-In</h3>
+      <p>{{ stats[0].CheckedIn }}</p>
+    </div>
+
+    <div class="kpi-card">
+      <h3>Pending</h3>
+      <p>{{ stats[0].Pending }}</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-grid">
+
+    <!-- Appointments -->
+    <div class="card appointments">
+      <h2>Today's Appointments</h2>
+
+      <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Patient</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            @for(appointment of appointments;track appointment.id){
+                <tr>
+                    <td>{{ appointment.time }}</td>
+                    <td>{{ appointment.patient_name }}</td>
+                    <td [class]="appointment.status | lowercase">{{ appointment.status }}</td>
+                    <td><button class="btn">{{ appointment.Action }}</button></td>
+                </tr>
+            }
+        </tbody>
+      </table>
+
+      </div>
+      <div class="d-flex gap-2">
+        <!-- <button class="btn-action btn-view" title="View Details">
+            <i class="fa-solid fa-eye"></i>
+        </button> -->
+
+        <button class="btn-action btn-add" title="Add New">
+            <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Activity Feed -->
+    <div class="card activity">
+      <h2>Live Activity</h2>
+
+      <ul>
+        @for(activity of liveactivities;track activity.id){
+            <li>✔ {{ activity.activity }}</li>
+        }
+      </ul>
+    </div>
+
+    <!-- Alerts -->
+    <div class="card alerts">
+      <h2>Alerts</h2>
+
+      <ul>
+        @for(alert of alerts;track alert.id){
+            <li>⚠ {{ alert.alert }}</li>
+        }
+      </ul>
+    </div>
+
+    <!-- Patient Insights -->
+    <div class="card insights">
+      <h2>Patient Insights</h2>
+
+      <ul>
+        <li>New Patients: {{ patientInsight[0]?.NewPatients }}</li>
+        <li>Returning: {{ patientInsight[0]?.Retuning }}</li>
+        <li>High Risk: {{ patientInsight[0]?.HighRisk }}</li>
+      </ul>
+    </div>
+
+  </div>
+  <br/>
+<div class="app-footer">
+  © 2026 Syvuno. All rights reserved. The potential of healthcare.
+</div>
+</div>
+
+  <!-- <footer> 
+    Copyright © 2026 <br/>
+    idea bin
+  </footer> -->
+
+
+<!-- universal model -->
+<ng-template #content let-modal>
+  <!-- <div class="modal-header"> -->
+    <!-- <h4 class="modal-title" id="modal-basic-title">{{page}}</h4> -->
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  <!-- </div> -->
+
+@switch (page) {
+  @case ('accounts') {
+    <div class="modal-tiles">
+      <button>Profile</button>
+      <button>Users</button>
+      <button>Patients</button>
+    </div>
+  }
+  @case ('files') {
+    <div class="modal-tiles">
+      <button>Patient Files</button>
+      <button>Invoices</button>
+      <button>Audits</button>
+      <button>Other</button>
+    </div>
+  }
+  @case ('settings') {
+    <div class="modal-tiles">
+      <button>Profile Settings</button>
+      <button>Permissions</button>
+      <button>Privacy</button>
+      <button>Calendar Settings</button>
+      <button>Other</button>
+    </div>
+  }
+  @default {
+    <p>Error ecountered</p>
+  }
+}
+
+</ng-template>
