@@ -1,0 +1,24 @@
+
+<!-- banner.component.html - Modern Angular syntax -->
+<div class="banner-container">
+  <!-- New control flow syntax - no imports needed! -->
+  @for (slide of slides; track $index; let i = $index) {
+    <div class="banner-slide" 
+         [class.active]="i === currentIndex"
+         [style.backgroundImage]="'url(' + slide.image + ')'">
+      <div class="banner-content">
+        <h2>Maintenance In-Progress</h2>
+        <p>We'll be back soon</p>
+      </div>
+    </div>
+  }
+  
+  <div class="banner-dots">
+    @for (slide of slides; track $index; let i = $index) {
+      <button class="dot"
+              [class.active-dot]="i === currentIndex"
+              (click)="goToSlide(i)">
+      </button>
+    }
+  </div>
+</div>

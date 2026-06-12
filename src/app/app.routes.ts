@@ -15,13 +15,14 @@ import { PatientList } from './modules/patients/patient-list/patient-list';
 import { PatientDetails } from './modules/patients/patient-details/patient-details';
 import { PatientForm } from './modules/patients/patient-form/patient-form';
 import { Home } from './modules/home/home';
+import { Maintenance } from './modules/maintenance/maintenance';
 
 export const routes: Routes = [
 
   // Default redirect
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'maintenance',
     pathMatch: 'full'
   },
 
@@ -45,6 +46,12 @@ export const routes: Routes = [
   {
     path: 'home',
     component: Home
+  },
+  
+  // Maintenance
+  {
+    path: 'maintenance',
+    component: Maintenance
   },
 
   // Patients Module
@@ -73,7 +80,7 @@ export const routes: Routes = [
   // Fallback (404)
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'maintenance'
   }
 
 ];
